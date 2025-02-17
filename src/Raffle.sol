@@ -13,15 +13,20 @@ contract Raffle{
     error Raffle_SendMoreToEnterRaffle();
 
     uint256 private immutable i_entryFee;
-    
+
+    /**
+     * @dev The interval is the time after which the winner will be picked
+     */
+    uint256 private immutable i_interval;
     address payable[] private s_players;
 
     // events
     event RaffleEntered(address indexed player, uint256 amount);
 
 
-    constructor(uint256 entryFees) {
+    constructor(uint256 entryFees, uint256 interval) {
         i_entryFee = entryFees;
+        i_interval = interval;
     }
 
     function enterRaffle() public payable{
